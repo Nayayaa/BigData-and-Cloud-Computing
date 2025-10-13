@@ -1,5 +1,5 @@
-# BigData-and-Cloud-Computing
-Repositório para o trabalho de ChatBot
+# BigData and Cloud Computing
+Repositório para Trabalhos de BigData e Cloud Computing utilizando ChatBot
 
 Reserva de Hotel e Passagens aérias:
 - **Entender como funciona o Azure.**
