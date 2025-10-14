@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg-hotel
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hotel
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: ./chatbot-api
+    container_name: hotel-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hotel
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+
+  bot:
+    build: ./bot-reserva
+    container_name: hotel-bot
+    environment:
+      BACKEND_URL: http://api:8080/api/reservas
+    depends_on:
+      - api
+    ports:
+      - "3978:3978"
+
+volumes:
+  pgdata:
